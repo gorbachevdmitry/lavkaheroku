@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath magazin magazin.wsgi --log-file -
