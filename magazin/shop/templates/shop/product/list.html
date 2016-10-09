@@ -1,0 +1,76 @@
+{% extends "shop/base.html" %}
+{% load static from staticfiles %}
+
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+<div class="row">
+  <div class="col-xs-3">
+      <div class="dropdown">
+
+    <!--Trigger-->
+    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выбери меня</button>
+
+    <!--Menu-->
+    <div class="dropdown-menu dropdown-success" aria-labelledby="dropdownMenu5" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+         {% for c in categories %}
+        <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+<!--/Dropdown success-->
+
+  </div>
+  <div class="col-xs-8">
+{% for product in products %}
+     <div class="col-lg-4 col-md-6 m-b-r wow fadeIn" data-wow-delay="0.3s">
+<!--Card-->
+<div class="card card-cascade narrower">
+
+    <!--Card image-->
+    <div class="view overlay hm-white-slight">
+        <img id="ff" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="img-fluid" alt="">
+        <a  href="{{ product.get_absolute_url }}">
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--/.Card image-->
+
+    <!--Card content-->
+    <div class="card-block text-xs-center">
+        <!--Category & Title-->
+
+        <h4 class="card-title"><strong><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></strong></h4>
+
+        <!--Description-->
+        <p class="card-text">{{ product.description }}
+        </p>
+
+        <!--Card footer-->
+        <div class="card-footer">
+            <span class="left">руб{{ product.price }}</span>
+            <span class="right">
+<a class="" data-toggle="tooltip" data-placement="top" title="Quick Look"><i class="fa fa-eye"></i></a>
+<a class="" data-toggle="tooltip" data-placement="top" title="Добавить в корзину"><i class="fa fa-heart"></i></a>
+</span>
+        </div>
+
+    </div>
+    <!--/.Card content-->
+
+</div>
+    </div>
+<!--/.Card-->
+{% endfor %}
+
+  </div>
+
+</div>
+    </div>
+
+
+{% endblock %}

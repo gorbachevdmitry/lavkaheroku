@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  Thank you
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-8">
+  <h1>Спасибо Вам </h1>
+  <p> Ваш заказ номер: <strong>{{ order.id }}</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

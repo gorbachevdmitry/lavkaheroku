@@ -1,0 +1,106 @@
+{% extends "shop/base.html" %}
+
+{% load static from staticfiles %}
+{% block title %}
+  Your shopping cart
+{% endblock %}
+
+{% block content %}
+
+<!--Shopping Cart table-->
+
+    <div class="container">
+<div class="table-responsive">
+    <table class="table product-table">
+        <!--Table head-->
+        <thead>
+            <tr>
+
+                <th>Фото </th>
+                <th>Товар</th>
+                <th>    Удалить</th>
+
+                 <th></th>
+                <th>Кол-во</th>
+                <th>Добавить</th>
+                 <th>Цена</th>
+                <th>Цена всего</th>
+
+
+            </tr>
+        </thead>
+        <!--/Table head-->
+
+        <!--Table body-->
+        <tbody>
+{% for item in cart %}
+        {% with product=item.product %}
+            <!--First row-->
+            <tr>
+                <th scope="row">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="" class="img-fluid">
+                </th>
+                <td>
+                    <h5><strong>{{ product.name }}</strong></h5>
+                    <p class="text-muted"></p>
+                </td>
+
+             <td><a  class="btn btn-primary-outline waves-effect btn-sm" href="{% url "cart:cart_remove" product.id %}">Удалить</a></td>
+               <td><form action="{% url "cart:cart_add" product.id %}" method="post">
+
+<label></label>
+<td><select type="{{ cart_product_form }}" title="Добавить" id="id_quantity" name="quantity"  class="browser-default">
+    <option value="{{ item.update_quantity_form.update }},{{ item.update_quantity_form.quantity }}">{{ item.quantity }}</option>
+
+    <option value="1"> 1</option>
+    <option value="2"> 2</option>
+    <option value="3"> 3</option>
+    <option value="4"> 4</option>
+    <option value="5"> 5</option>
+    <option value="6"> 6</option>
+    <option value="7"> 7</option>
+    <option value="8"> 8</option>
+    <option value="9"> 9</option>
+    <option value="10"> 10</option>
+
+</select></td>
+
+
+<td><button type="submit" class="btn btn-success-outline waves-effect btn-sm" >Добавить</button></td>
+
+ {% csrf_token %}
+            </form>
+</td>
+                <td class="num">{{ item.price }}руб</td>
+            <td class="num">{{ item.total_price }}руб</td>
+            </tr>
+        {% endwith %}
+      {% endfor %}
+                <td>
+                <td colspan="3"></td>
+                <td>
+                    <h4><strong>Итого</strong></h4></td>
+                <td>
+                    <h4><strong>{{ cart.get_total_price }}руб</strong></h4></td>
+                <td colspan="3"><a href="{% url "orders:order_create" %}" class="btn btn-success-outline waves-effect btn-lg">Оплатить</a></td>
+
+
+        </tbody>
+        <!--/Table body-->
+    </table>
+
+
+
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <a href="{% url "shop:product_list" %}" class="btn btn-primary btn-lg btn-block">Продолжить покупки</a>
+    </div>
+        <div class="col-xs-12">
+
+    </div>
+<!--/Shopping Cart table-->
+ </div>
+    </div>
+{% endblock %}
