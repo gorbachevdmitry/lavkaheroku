@@ -2,10 +2,12 @@ amqp==1.4.9
 anyjson==0.3.3
 Babel==2.3.4
 billiard==3.3.0.23
+boto==2.42.0
 celery==3.1.18
 dj-database-url==0.4.1
 Django==1.8.5
 django-paypal==0.2.5
+django-storages==1.5.1
 flower==0.9.1
 gunicorn==19.6.0
 kombu==3.0.36
