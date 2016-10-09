@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath magazin magazin.wsgi --log-file -
+web: gunicorn --pythonpath magazin magazin.deploy --log-file -
